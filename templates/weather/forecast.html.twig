@@ -1,20 +1,26 @@
-{% extends 'base.html.twig' %}
+{% extends 'boxed-layout.html.twig' %}
 
 {% block title %} Forecast {% endblock %}
 
-{% block body %}
-    <h1>Forecast code{{ countryCode }} in city: {{ city }}</h1>
+{% block content %}
+    <div class="row mt-3">
+        <div class="col">
+            <h1>Forecast code : {{ countryCode }} in city: {{ city }}</h1>
+        </div>
+    </div>
 
-    <ul>
+    <div class="row mt-3 forecasts">
         {% for forecast in forecasts %}
-            <li>
-                <strong>Temperature:</strong> {{ forecast.tempaeratureCelsius }}<br>
-                <strong>Humidity:</strong> {{ forecast.humidity }}°C<br>
-                <strong>Wind Speed:</strong> {{ forecast.windSpeed }} <br>
-                <strong>Pressure:</strong> {{ forecast.pressure }} km/h<br>
-            </li>
+            <div class="col-12 col-lg-6">
+                <div class="forecast-card">
+                    <strong>Temperature:</strong> {{ forecast.tempaeratureCelsius }}<br>
+                    <strong>Humidity:</strong> {{ forecast.humidity }}°C<br>
+                    <strong>Wind Speed:</strong> {{ forecast.windSpeed }} <br>
+                    <strong>Pressure:</strong> {{ forecast.pressure }} km/h<br>
+                </div>
+            </div>
         {% else %}
             <li>No forecast data available.</li>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}

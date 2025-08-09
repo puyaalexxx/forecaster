@@ -10,8 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class WeatherController extends AbstractController
 {
 
-    #[Route('/weather/{countryCode}/{city}', name: 'weather')]
-    public function forecast(string $countryCode, string $city): Response{
+    #[Route('/weather/{countryCode}/{city}', name: 'forecasts')]
+    public function forecast(string $countryCode = '2050', string $city = 'Chisinau'): Response{
 
         $data = [
             [

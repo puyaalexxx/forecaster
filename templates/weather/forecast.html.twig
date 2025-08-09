@@ -5,7 +5,8 @@
 {% block content %}
     <div class="row mt-3">
         <div class="col">
-            <h1>Forecast code : {{ countryCode }} in city: {{ city }}</h1>
+            <h1>Forecast code : {{ location.countryCode }} in city: {{ location.name }}</h1>
+            <h3>Latitude: {{ location.latitude }} and Longitude: {{ location.longitute }}</h3>
         </div>
     </div>
 

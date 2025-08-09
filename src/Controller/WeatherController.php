@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Repository\ForecastRepository;
+use App\Repository\LocationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,33 +13,21 @@ class WeatherController extends AbstractController
 {
 
     #[Route('/weather/{countryCode}/{city}', name: 'forecasts')]
-    public function forecast(string $countryCode = '2050', string $city = 'Chisinau'): Response{
+    public function forecast(
+        LocationRepository $locationRepository, ForecastRepository $forecastRepository,
+        string $countryCode = 'MD', string $city = 'Chisinau'): Response{
 
-        $data = [
-            [
-              'tempaeratureCelsius' => 20,
-              'humidity' => 50,
-              'windSpeed' => 10,
-              'pressure' => 1012,
-            ],
-            [
-                'tempaeratureCelsius' => 22,
-                'humidity' => 55,
-                'windSpeed' => 12,
-                'pressure' => 1010,
-            ],
-            [
-                'tempaeratureCelsius' => 19,
-                'humidity' => 60,
-                'windSpeed' => 8,
-                'pressure' => 1015,
-            ],
-        ];
+        $location = $locationRepository->findOneBy(['countryCode' => $countryCode, 'name' => $city]);
+
+        if (!$location) {
+            throw $this->createNotFoundException('Location not found');
+        }
+
+        $forecasts = $forecastRepository->findForForecast($location);
 
         return $this->render('weather/forecast.html.twig', [
-            'forecasts' => $data,
-            'countryCode' => $countryCode,
-            'city' => $city,
+            'forecasts' => $forecasts,
+            'location' => $location,
         ]);
     }
 }

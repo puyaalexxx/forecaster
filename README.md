@@ -3,6 +3,7 @@
 ## Features:
 
 - Symfony 7.3
+- PHP 8.3
 - Routing
 - Controllers
 - PostgreSQL Database

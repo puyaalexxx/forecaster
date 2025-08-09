@@ -6,6 +6,8 @@
 - PHP 8.3
 - Routing
 - Controllers
-- PostgreSQL Database
+- sqLite Database
 - Twig Templating
 - Doctrine ORM
+- Migrations
+- 

@@ -3,5 +3,18 @@
 {% block title %} Forecast {% endblock %}
 
 {% block body %}
-    {{ countryCode }} in city: {{ city }}<br>
+    <h1>Forecast code{{ countryCode }} in city: {{ city }}</h1>
+
+    <ul>
+        {% for forecast in forecasts %}
+            <li>
+                <strong>Temperature:</strong> {{ forecast.tempaeratureCelsius }}<br>
+                <strong>Humidity:</strong> {{ forecast.humidity }}°C<br>
+                <strong>Wind Speed:</strong> {{ forecast.windSpeed }} <br>
+                <strong>Pressure:</strong> {{ forecast.pressure }} km/h<br>
+            </li>
+        {% else %}
+            <li>No forecast data available.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

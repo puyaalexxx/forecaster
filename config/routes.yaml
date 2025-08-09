@@ -3,3 +3,8 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+#custom route
+#weather_highlander:
+#    path: /weather/highlander
+#    controller: App\Controller\WeatherController::index

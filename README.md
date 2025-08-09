@@ -6,3 +6,5 @@
 - Routing
 - Controllers
 - PostgreSQL Database
+- Twig Templating
+- Doctrine ORM

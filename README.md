@@ -11,3 +11,6 @@
 - Doctrine ORM
 - Migrations
 - Fixtures
+- Scaffolding
+- CRUD Operations
+- Custom Validators via Yaml

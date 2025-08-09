@@ -10,4 +10,4 @@
 - Twig Templating
 - Doctrine ORM
 - Migrations
-- 
+- Fixtures

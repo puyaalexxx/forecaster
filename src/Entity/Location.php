@@ -16,11 +16,17 @@ class Location
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
     #[ORM\Column(length: 4)]
     private ?string $countryCode = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 7, scale: 0)]
     private ?string $latitude = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 7, scale: 0)]
+    private ?string $longitute = null;
 
     /**
      * @var Collection<int, Forecast>
@@ -88,6 +94,30 @@ class Location
                 $forecast->setLocation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getLongitute(): ?string
+    {
+        return $this->longitute;
+    }
+
+    public function setLongitute(string $longitute): static
+    {
+        $this->longitute = $longitute;
 
         return $this;
     }

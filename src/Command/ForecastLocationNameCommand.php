@@ -22,7 +22,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class ForecastLocationNameCommand extends Command
 {
-    public function __construct(private ForecastService $forecastService)
+    public function __construct(private readonly ForecastService $forecastService)
     {
         parent::__construct();
     }

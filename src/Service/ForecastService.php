@@ -21,7 +21,7 @@ class ForecastService
      * @param string $countryCode
      * @param string $locationName
      * @return Forecast[]
-     * @throws Exception
+     * @throws LocationNotFoundException
      */
     public function getForecastsForLocationName(string $countryCode, string $locationName): array
     {

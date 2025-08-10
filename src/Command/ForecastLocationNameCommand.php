@@ -2,8 +2,12 @@
 
 namespace App\Command;
 
+use App\Entity\Forecast;
+use App\Entity\Location;
+use App\Exception\LocationNotFoundException;
 use App\Repository\ForecastRepository;
 use App\Repository\LocationRepository;
+use App\Service\ForecastService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,7 +22,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class ForecastLocationNameCommand extends Command
 {
-    public function __construct(private LocationRepository $locationRepository, private ForecastRepository $forecastRepository,)
+    public function __construct(private ForecastService $forecastService)
     {
         parent::__construct();
     }
@@ -44,15 +48,17 @@ class ForecastLocationNameCommand extends Command
             $io->writeln("Running command with $cityName, $countryCode");
         }
 
-        $location = $this->locationRepository->findOneBy(['countryCode' => $countryCode, 'name' => $cityName]);
-
-        if (!$location) {
-            throw new \Exception('Location not found');
+        try {
+            /** @var $location  Location */
+            /** @var $forecasts Forecast[] */
+            list($location, $forecasts) = $this->forecastService->getForecastsForLocationName($countryCode, $cityName);
+        }
+        catch (LocationNotFoundException){
+            $io->error("Failed to find location with name $cityName and country code $countryCode");
+            return Command::FAILURE;
         }
 
-        $forecasts = $this->forecastRepository->findForForecast($location);
-
-        $io->title("Forecast for $cityName, $countryCode");
+        $io->title("Forecast for {$location->getName()}, {$location->getCountryCode()}");
 
         $forecastArray = [];
         foreach ($forecasts as $forecast) {

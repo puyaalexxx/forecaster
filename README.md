@@ -14,3 +14,6 @@
 - Scaffolding
 - CRUD Operations
 - Custom Validators via Yaml
+- Custom Console Commands
+- Custom form types
+- Services/Repositories
